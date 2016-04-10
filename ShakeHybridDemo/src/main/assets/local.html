@@ -1,0 +1,39 @@
+<html>
+    <script src="./socket.io-1.4.3.js"></script>
+
+    <body>
+        <a>js中调用本地方法</a>
+        <p></p>
+        <div id="helloweb">
+
+        </div>
+
+        <script>
+            function funFromjs(){
+                document.getElementById("helloweb").innerHTML="HelloWebView,i'm from js";
+            }
+            var aTag = document.getElementsByTagName('a')[0];
+            aTag.addEventListener('click', function(){
+                //调用android本地方法
+                afocus.dispatch("notify", "showToast", "{}", "{}");
+
+                /*
+                sensorBridge.openAccelerometerSensor();
+
+                var socket = io.connect('http://192.168.99.139:8080/sock');
+                // 当服务端发送一条消息到客户端，message 事件即被触发。我们把消息在控制台打印出来
+                socket.on('message', function(data){ notifyBridge.showToast(data) });
+                setInterval(function() {
+                    if(sensorBridge.getAccelerometerX() > 5 || sensorBridge.getAccelerometerY() > 5 ||
+                            sensorBridge.getAccelerometerZ() > 5) {
+                        socket.emit("count", "1");
+                    }
+                }, 100);
+                */
+
+                return false;
+            }, false);
+
+        </script>
+    </body>
+</html>

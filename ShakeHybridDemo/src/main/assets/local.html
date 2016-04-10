@@ -1,6 +1,6 @@
 <html>
     <script src="./socket.io-1.4.3.js"></script>
-
+    <script src="./afocus.js"></script>
     <body>
         <a>js中调用本地方法</a>
         <p></p>
@@ -15,7 +15,12 @@
             var aTag = document.getElementsByTagName('a')[0];
             aTag.addEventListener('click', function(){
                 //调用android本地方法
-                afocus.dispatch("notify", "showToast", "{}", "{}");
+                lib.AFocus.call('notify', 'showToast', {}, function(s) {
+                    console.log('succ');
+                }, function(e) {
+                    console.log('fail');
+                });
+
 
                 /*
                 sensorBridge.openAccelerometerSensor();

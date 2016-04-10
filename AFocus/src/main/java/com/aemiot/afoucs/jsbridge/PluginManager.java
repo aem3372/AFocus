@@ -30,7 +30,8 @@ public class PluginManager {
     public void executePluginMothed(String plugin, String mothed, String params, JSBridgeContext jsContext) {
         HybridPlugin hybridPlugin = mPluginMap.get(plugin);
         if(hybridPlugin != null) {
-            hybridPlugin.execute(mothed, params, jsContext);
+            JSBridgeResult result = hybridPlugin.execute(mothed, params, jsContext);
+            jsContext.callback();
         } else {
             Log.e(TAG, "not find plugin");
         }

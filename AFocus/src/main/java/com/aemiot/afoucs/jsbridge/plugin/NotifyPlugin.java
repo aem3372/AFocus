@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.aemiot.afoucs.jsbridge.HybridPlugin;
 import com.aemiot.afoucs.jsbridge.JSBridgeContext;
+import com.aemiot.afoucs.jsbridge.JSBridgeResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +41,7 @@ public class NotifyPlugin implements HybridPlugin
     }
 
     @Override
-    public void execute(String method, String params, JSBridgeContext jsContext) {
+    public JSBridgeResult execute(String method, String params, JSBridgeContext jsContext) {
         if("showToast".equals(method)) {
             if(params != null) {
                 try {
@@ -56,5 +57,6 @@ public class NotifyPlugin implements HybridPlugin
             }
             showToast();
         }
+        return new JSBridgeResult();
     }
 }

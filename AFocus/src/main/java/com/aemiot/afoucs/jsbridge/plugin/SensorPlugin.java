@@ -11,6 +11,7 @@ import android.webkit.JavascriptInterface;
 
 import com.aemiot.afoucs.jsbridge.HybridPlugin;
 import com.aemiot.afoucs.jsbridge.JSBridgeContext;
+import com.aemiot.afoucs.jsbridge.JSBridgeResult;
 
 public class SensorPlugin implements HybridPlugin {
     @NonNull
@@ -68,7 +69,7 @@ public class SensorPlugin implements HybridPlugin {
     }
 
     @Override
-    public void execute(String method, String params, JSBridgeContext jsContext) {
+    public JSBridgeResult execute(String method, String params, JSBridgeContext jsContext) {
         if("openAccelerometerSensor".equals(method)) {
             openAccelerometerSensor();
         } else if("closeAccelerometerSensor".equals(method)) {
@@ -80,5 +81,6 @@ public class SensorPlugin implements HybridPlugin {
         } else if("getAccelerometerZ".equals(method)) {
             getAccelerometerZ();
         }
+        return new JSBridgeResult();
     }
 }

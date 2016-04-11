@@ -1,12 +1,15 @@
 package com.aemiot.afoucs.webview;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 
+import com.aemiot.afoucs.client.AFWebChromeClient;
+import com.aemiot.afoucs.client.AFWebClient;
 import com.aemiot.afoucs.jsbridge.JSBridge;
 
 public class AFWebView extends WebView implements IWebView{
@@ -30,9 +33,14 @@ public class AFWebView extends WebView implements IWebView{
 
     public void init() {
         mJSBridge = new JSBridge(this);
-
+        setWebViewClient(new AFWebClient());
+        setWebChromeClient(new AFWebChromeClient());
         getSettings().setJavaScriptEnabled(true);
-        this.addJavascriptInterface(mJSBridge, "afocus");
+    }
+
+    @Override
+    public JSBridge getJSBridge() {
+        return mJSBridge;
     }
 
     @Override

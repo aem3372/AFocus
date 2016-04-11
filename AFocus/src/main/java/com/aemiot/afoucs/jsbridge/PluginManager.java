@@ -27,21 +27,21 @@ public class PluginManager {
         mPluginMap.remove(name);
     }
 
-    public void executePluginMothed(String plugin, String mothed, String params, JSBridgeContext jsContext) {
+    public void executePluginMethod(String plugin, String method, String params, JSBridgeContext jsContext) {
         HybridPlugin hybridPlugin = mPluginMap.get(plugin);
         if(hybridPlugin != null) {
-            JSBridgeResult result = hybridPlugin.execute(mothed, params, jsContext);
+            JSBridgeResult result = hybridPlugin.execute(method, params, jsContext);
             jsContext.callback();
         } else {
             Log.e(TAG, "not find plugin");
         }
     }
 
-    public void asyncExecutePluginMothed(final String plugin, final String mothed, final String params, final JSBridgeContext jsContext) {
+    public void asyncExecutePluginMethod(final String plugin, final String method, final String params, final JSBridgeContext jsContext) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... args) {
-                executePluginMothed(plugin, mothed, params, jsContext);
+                executePluginMethod(plugin, method, params, jsContext);
                 return null;
             }
         }.execute();

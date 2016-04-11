@@ -1,6 +1,5 @@
 package com.aemiot.afoucs.jsbridge;
 
-import com.aemiot.afoucs.webview.AFWebView;
 import com.aemiot.afoucs.webview.IWebView;
 
 /**

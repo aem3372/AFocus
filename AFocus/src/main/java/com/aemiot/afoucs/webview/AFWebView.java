@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.ValueCallback;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.aemiot.afoucs.client.AFWebChromeClient;
@@ -13,6 +14,8 @@ import com.aemiot.afoucs.client.AFWebClient;
 import com.aemiot.afoucs.jsbridge.JSBridge;
 
 public class AFWebView extends WebView implements IWebView{
+
+    public static final String TAG = "AFWebView";
 
     private JSBridge mJSBridge;
 
@@ -35,7 +38,16 @@ public class AFWebView extends WebView implements IWebView{
         mJSBridge = new JSBridge(this);
         setWebViewClient(new AFWebClient());
         setWebChromeClient(new AFWebChromeClient());
-        getSettings().setJavaScriptEnabled(true);
+        WebSettings settings = getSettings();
+        settings.setJavaScriptEnabled(true);
+        String ua = settings.getUserAgentString();
+        if(ua == null) {
+            ua = "";
+        } else {
+            ua += " ";
+        }
+        settings.setUserAgentString(ua + "AFocus/1.0");
+        Log.i(TAG, "UA:" + settings.getUserAgentString());
     }
 
     @Override

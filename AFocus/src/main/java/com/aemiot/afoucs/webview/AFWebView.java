@@ -51,6 +51,11 @@ public class AFWebView extends WebView implements IWebView{
     }
 
     @Override
+    public Context getWebContext() {
+        return getContext();
+    }
+
+    @Override
     public JSBridge getJSBridge() {
         return mJSBridge;
     }

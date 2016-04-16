@@ -2,12 +2,10 @@ package com.aemiot.afoucs.jsbridge.plugin;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.JsonReader;
-import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
 import com.aemiot.afoucs.jsbridge.HybridPlugin;
-import com.aemiot.afoucs.jsbridge.JSBridgeContext;
+import com.aemiot.afoucs.jsbridge.CallMethodContext;
 import com.aemiot.afoucs.jsbridge.JSBridgeResult;
 
 import org.json.JSONException;
@@ -41,7 +39,7 @@ public class NotifyPlugin implements HybridPlugin
     }
 
     @Override
-    public JSBridgeResult execute(String method, String params, JSBridgeContext jsContext) {
+    public JSBridgeResult execute(String method, String params, CallMethodContext jsContext) {
         if("showToast".equals(method)) {
             if(params != null) {
                 try {

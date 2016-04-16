@@ -7,10 +7,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.webkit.JavascriptInterface;
 
 import com.aemiot.afoucs.jsbridge.HybridPlugin;
-import com.aemiot.afoucs.jsbridge.JSBridgeContext;
+import com.aemiot.afoucs.jsbridge.CallMethodContext;
 import com.aemiot.afoucs.jsbridge.JSBridgeResult;
 
 public class SensorPlugin implements HybridPlugin {
@@ -69,7 +68,7 @@ public class SensorPlugin implements HybridPlugin {
     }
 
     @Override
-    public JSBridgeResult execute(String method, String params, JSBridgeContext jsContext) {
+    public JSBridgeResult execute(String method, String params, CallMethodContext jsContext) {
         if("openAccelerometerSensor".equals(method)) {
             openAccelerometerSensor();
         } else if("closeAccelerometerSensor".equals(method)) {

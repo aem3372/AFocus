@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.aemiot.afoucs.jsbridge.HybridPlugin;
 import com.aemiot.afoucs.jsbridge.CallMethodContext;
-import com.aemiot.afoucs.jsbridge.JSBridgeResult;
+import com.aemiot.afoucs.jsbridge.ResultInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,12 +25,7 @@ public class NotifyPlugin implements HybridPlugin
 
     public void showToast(final String text)
     {
-        new Handler(mContext.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
-            }
-        });
+        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
     }
 
     public void showToast()
@@ -39,7 +34,7 @@ public class NotifyPlugin implements HybridPlugin
     }
 
     @Override
-    public JSBridgeResult execute(String method, String params, CallMethodContext jsContext) {
+    public void execute(String method, String params, CallMethodContext jsContext) {
         if("showToast".equals(method)) {
             if(params != null) {
                 try {
@@ -47,14 +42,14 @@ public class NotifyPlugin implements HybridPlugin
                     if (jsonObject.has("text")) {
                         String text = jsonObject.getString("text");
                         showToast(text);
+                        jsContext.success();
                     }
-
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    jsContext.fail();
                 }
             }
             showToast();
+            jsContext.success();
         }
-        return new JSBridgeResult();
     }
 }

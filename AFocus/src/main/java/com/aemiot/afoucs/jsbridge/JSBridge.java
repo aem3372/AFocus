@@ -12,7 +12,7 @@ import com.aemiot.afoucs.webview.IWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JSBridge implements Handler.Callback{
+public class JSBridge implements Handler.Callback {
 
     private final static String TAG = "JSBridge";
 
@@ -20,10 +20,12 @@ public class JSBridge implements Handler.Callback{
 
     private IWebView mWebView;
     private Handler mHandler;
+    private CallbackDispatcher mCallbackDispatcher;
 
     public JSBridge(IWebView webView) {
         mWebView = webView;
         mHandler = new Handler(Looper.getMainLooper(), this);
+        mCallbackDispatcher = new CallbackDispatcher();
     }
 
     // json协议 {plugin: "pluginName", method: "methodName", params: {}, info: {}}
@@ -45,17 +47,16 @@ public class JSBridge implements Handler.Callback{
     public void dispatch(String plugin, String method, String params, String info) {
         Log.d(TAG, "[dispatch] {plugin:" + plugin + ",method:" + method + ",params:" + params
                 + ",info:" + info);
-        CallMethodContext jsContext = new CallMethodContext();
-        jsContext.plugin = plugin;
-        jsContext.method = method;
-        jsContext.params = params;
+        int token = -1;
         JSONObject json = null;
         try {
             json = new JSONObject(info);
-            jsContext.token =  json.getInt("token");
+            token =  json.getInt("token");
         } catch (JSONException e) {
-            e.printStackTrace();
+
         }
+        CallMethodContext jsContext = new CallMethodContext(
+                plugin, method, params, token, mCallbackDispatcher, mCallbackDispatcher);
         dispatch(jsContext);
     }
 
@@ -72,9 +73,9 @@ public class JSBridge implements Handler.Callback{
             case CALL_METHOD: {
                 CallMethodContext jsContext = (CallMethodContext) msg.obj;
 
-                HybridPlugin hybridPlugin = AFoucsSDK.getInstance().getPluginManager().getPlugin(jsContext.plugin);
+                HybridPlugin hybridPlugin = AFoucsSDK.getInstance().getPluginManager().getPlugin(jsContext.getPlugin());
                 if(hybridPlugin != null) {
-                    hybridPlugin.execute(jsContext.method, jsContext.params, jsContext);
+                    hybridPlugin.execute(jsContext.getMethod(), jsContext.getParams(), jsContext);
                 } else {
                     Log.e(TAG, "not find plugin");
                 }
@@ -84,7 +85,36 @@ public class JSBridge implements Handler.Callback{
         return false;
     }
 
-    public void callback(CallMethodContext context) {
-        mWebView.evaluateJavascript("lib.AFocus.callback(" + context.token + ",'successed','');");
+    public void callbackSuccessed(CallMethodContext context, ResultInfo info) {
+        callback(context, "successed", info);
+    }
+
+    public void callbackFailed(CallMethodContext context, ResultInfo info) {
+        callback(context, "failed", info);
+    }
+
+    public void callback(CallMethodContext context, String result, ResultInfo info) {
+        JSONObject resultInfo = new JSONObject();
+        try {
+            resultInfo.put("code", info.code);
+            resultInfo.put("msg", info.msg);
+        } catch (JSONException e) {
+
+        }
+        mWebView.evaluateJavascript("lib.AFocus.callback(" +
+                context.getToken() + ",\'" + result + "\'," + resultInfo + ");");
+    }
+
+    private class CallbackDispatcher implements ISuccessedCallback, IFailedCallback{
+
+        @Override
+        public void failed(CallMethodContext context, ResultInfo info) {
+            callbackFailed(context, info);
+        }
+
+        @Override
+        public void successed(CallMethodContext context, ResultInfo info) {
+            callbackSuccessed(context, info);
+        }
     }
 }

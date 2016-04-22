@@ -1,18 +1,15 @@
-package com.aemiot.afoucs.client;
+package com.aemiot.breeze.client;
 
 import android.webkit.JsPromptResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
-import com.aemiot.afoucs.webview.IWebView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.aemiot.breeze.webview.IWebView;
 
 /**
  * Created by fanye on 16/4/9.
  */
-public class AFWebChromeClient extends WebChromeClient {
+public class BRWebChromeClient extends WebChromeClient {
     @Override
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
         if("hybrid://protocol/af".equals(defaultValue)) {

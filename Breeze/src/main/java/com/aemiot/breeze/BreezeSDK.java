@@ -1,15 +1,15 @@
-package com.aemiot.afoucs;
+package com.aemiot.breeze;
 
 import android.content.Context;
 
-import com.aemiot.afoucs.jsbridge.PluginManager;
-import com.aemiot.afoucs.jsbridge.plugin.NotifyPlugin;
-import com.aemiot.afoucs.jsbridge.plugin.SensorPlugin;
+import com.aemiot.breeze.jsbridge.PluginManager;
+import com.aemiot.breeze.jsbridge.plugin.NotifyPlugin;
+import com.aemiot.breeze.jsbridge.plugin.SensorPlugin;
 
 /**
  * Created by fanye on 16/4/10.
  */
-public class AFoucsSDK {
+public class BreezeSDK {
 
     private boolean isInitialization = false;
 
@@ -17,7 +17,7 @@ public class AFoucsSDK {
 
     private PluginManager mPluginManager;
 
-    private AFoucsSDK() {
+    private BreezeSDK() {
 
     }
 
@@ -41,10 +41,10 @@ public class AFoucsSDK {
     }
 
     private static class SingleHolder {
-        public static AFoucsSDK instance = new AFoucsSDK();
+        public static BreezeSDK instance = new BreezeSDK();
     }
 
-    public static AFoucsSDK getInstance() {
+    public static BreezeSDK getInstance() {
         return SingleHolder.instance;
     }
 }

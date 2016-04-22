@@ -1,43 +1,41 @@
-package com.aemiot.afoucs.webview;
+package com.aemiot.breeze.webview;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import com.aemiot.afoucs.client.AFWebChromeClient;
-import com.aemiot.afoucs.client.AFWebClient;
-import com.aemiot.afoucs.jsbridge.JSBridge;
+import com.aemiot.breeze.client.BRWebChromeClient;
+import com.aemiot.breeze.client.BRWebClient;
+import com.aemiot.breeze.jsbridge.JSBridge;
 
-public class AFWebView extends WebView implements IWebView{
+public class BRWebView extends WebView implements IWebView{
 
     public static final String TAG = "AFWebView";
 
     private JSBridge mJSBridge;
 
-    public AFWebView(Context context) {
+    public BRWebView(Context context) {
         super(context);
         init();
     }
 
-    public AFWebView(Context context, AttributeSet attrs) {
+    public BRWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AFWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BRWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     public void init() {
         mJSBridge = new JSBridge(this);
-        setWebViewClient(new AFWebClient());
-        setWebChromeClient(new AFWebChromeClient());
+        setWebViewClient(new BRWebClient());
+        setWebChromeClient(new BRWebChromeClient());
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         String ua = settings.getUserAgentString();

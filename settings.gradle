@@ -1,1 +1,1 @@
-include ':ShakeHybridDemo', ':AFocus'
+include ':ShakeHybridDemo', ':Breeze'

@@ -1,7 +1,4 @@
-package com.aemiot.afoucs.jsbridge;
-
-import android.os.AsyncTask;
-import android.util.Log;
+package com.aemiot.breeze.jsbridge;
 
 import java.util.HashMap;
 import java.util.Map;

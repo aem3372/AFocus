@@ -1,8 +1,8 @@
-package com.aemiot.afoucs.webview;
+package com.aemiot.breeze.webview;
 
 import android.content.Context;
 
-import com.aemiot.afoucs.jsbridge.JSBridge;
+import com.aemiot.breeze.jsbridge.JSBridge;
 
 /**
  * Created by fanye on 16/4/11.

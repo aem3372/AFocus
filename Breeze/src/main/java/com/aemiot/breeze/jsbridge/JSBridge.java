@@ -1,4 +1,4 @@
-package com.aemiot.afoucs.jsbridge;
+package com.aemiot.breeze.jsbridge;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -6,8 +6,8 @@ import android.os.Message;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 
-import com.aemiot.afoucs.AFoucsSDK;
-import com.aemiot.afoucs.webview.IWebView;
+import com.aemiot.breeze.BreezeSDK;
+import com.aemiot.breeze.webview.IWebView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,7 +73,7 @@ public class JSBridge implements Handler.Callback {
             case CALL_METHOD: {
                 CallMethodContext jsContext = (CallMethodContext) msg.obj;
 
-                HybridPlugin hybridPlugin = AFoucsSDK.getInstance().getPluginManager().getPlugin(jsContext.getPlugin());
+                HybridPlugin hybridPlugin = BreezeSDK.getInstance().getPluginManager().getPlugin(jsContext.getPlugin());
                 if(hybridPlugin != null) {
                     hybridPlugin.execute(jsContext.getMethod(), jsContext.getParams(), jsContext);
                 } else {

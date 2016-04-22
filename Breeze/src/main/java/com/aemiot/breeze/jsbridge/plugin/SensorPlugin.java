@@ -1,4 +1,4 @@
-package com.aemiot.afoucs.jsbridge.plugin;
+package com.aemiot.breeze.jsbridge.plugin;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -8,9 +8,8 @@ import android.hardware.SensorManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.aemiot.afoucs.jsbridge.HybridPlugin;
-import com.aemiot.afoucs.jsbridge.CallMethodContext;
-import com.aemiot.afoucs.jsbridge.ResultInfo;
+import com.aemiot.breeze.jsbridge.HybridPlugin;
+import com.aemiot.breeze.jsbridge.CallMethodContext;
 
 public class SensorPlugin implements HybridPlugin {
     @NonNull

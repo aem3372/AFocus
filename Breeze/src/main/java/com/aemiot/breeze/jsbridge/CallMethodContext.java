@@ -1,4 +1,4 @@
-package com.aemiot.afoucs.jsbridge;
+package com.aemiot.breeze.jsbridge;
 
 import java.lang.ref.WeakReference;
 

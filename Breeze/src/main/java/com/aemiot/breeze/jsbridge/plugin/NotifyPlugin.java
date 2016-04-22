@@ -1,12 +1,10 @@
-package com.aemiot.afoucs.jsbridge.plugin;
+package com.aemiot.breeze.jsbridge.plugin;
 
 import android.content.Context;
-import android.os.Handler;
 import android.widget.Toast;
 
-import com.aemiot.afoucs.jsbridge.HybridPlugin;
-import com.aemiot.afoucs.jsbridge.CallMethodContext;
-import com.aemiot.afoucs.jsbridge.ResultInfo;
+import com.aemiot.breeze.jsbridge.HybridPlugin;
+import com.aemiot.breeze.jsbridge.CallMethodContext;
 
 import org.json.JSONException;
 import org.json.JSONObject;

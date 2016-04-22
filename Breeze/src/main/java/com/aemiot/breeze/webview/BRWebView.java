@@ -13,7 +13,7 @@ import com.aemiot.breeze.jsbridge.JSBridge;
 
 public class BRWebView extends WebView implements IWebView{
 
-    public static final String TAG = "AFWebView";
+    public static final String TAG = "BRWebView";
 
     private JSBridge mJSBridge;
 
@@ -44,7 +44,7 @@ public class BRWebView extends WebView implements IWebView{
         } else {
             ua += " ";
         }
-        settings.setUserAgentString(ua + "AFocus/1.0");
+        settings.setUserAgentString(ua + "Breeze/1.0");
         Log.i(TAG, "UA:" + settings.getUserAgentString());
     }
 

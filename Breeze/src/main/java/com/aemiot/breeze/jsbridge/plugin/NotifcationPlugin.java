@@ -12,24 +12,18 @@ import org.json.JSONObject;
 /**
  * 自定义的Android代码和JavaScript代码之间的桥梁类
  */
-public class NotifyPlugin implements HybridPlugin
+public class NotifcationPlugin extends HybridPlugin
 {
-    Context mContext;
-
-    public NotifyPlugin(Context c)
-    {
-        mContext = c;
-    }
-
     public void showToast(final String text)
     {
-        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     public void showToast()
     {
         showToast("toast test");
     }
+
 
     @Override
     public void execute(String method, String params, CallMethodContext jsContext) {

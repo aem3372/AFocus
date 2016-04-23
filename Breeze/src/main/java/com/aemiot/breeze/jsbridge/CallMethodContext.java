@@ -1,10 +1,7 @@
 package com.aemiot.breeze.jsbridge;
 
-import java.lang.ref.WeakReference;
+import android.util.Log;
 
-/**
- * Created by fanye on 16/4/10.
- */
 public class CallMethodContext {
 
     private String mPlugin;
@@ -13,18 +10,16 @@ public class CallMethodContext {
 
     private int mToken;
 
-    private WeakReference<ISuccessedCallback> mSuccCallback;
-    private WeakReference<IFailedCallback> mFailCallback;
+    private JSBridge mBridge;
 
     public CallMethodContext(String plugin, String method, String params, int token,
-                             ISuccessedCallback succCallback, IFailedCallback failCallback) {
+                             JSBridge jsBridge) {
         mPlugin = plugin;
         mMethod = method;
         mParams = params;
         mToken = token;
 
-        mSuccCallback = new WeakReference<>(succCallback);
-        mFailCallback = new WeakReference<>(failCallback);
+        mBridge = jsBridge;
     }
 
     public String getPlugin() {
@@ -44,14 +39,14 @@ public class CallMethodContext {
     }
 
     public void success(ResultInfo info) {
-        if(mSuccCallback.get() != null) {
-            mSuccCallback.get().successed(this, info);
+        if(mBridge != null) {
+            mBridge.callbackSuccessed(this, info);
         }
     }
 
     public void fail(ResultInfo info) {
-        if(mFailCallback.get() != null) {
-            mFailCallback.get().failed(this, info);
+        if(mBridge != null) {
+            mBridge.callbackFailed(this, info);
         }
     }
 
@@ -61,5 +56,11 @@ public class CallMethodContext {
 
     public void fail() {
         fail(ResultInfo.FAILED_RESULT_INFO);
+    }
+
+    public void sendEvent(BREvent event) {
+        if(mBridge != null) {
+            mBridge.fire(event);
+        }
     }
 }

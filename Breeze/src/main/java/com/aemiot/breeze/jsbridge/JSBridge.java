@@ -17,15 +17,14 @@ public class JSBridge implements Handler.Callback {
     private final static String TAG = "JSBridge";
 
     private final static int CALL_METHOD = 0x1001;
+    private final static int SEND_EVENT = 0x1002;
 
     private IWebView mWebView;
     private Handler mHandler;
-    private CallbackDispatcher mCallbackDispatcher;
 
     public JSBridge(IWebView webView) {
         mWebView = webView;
         mHandler = new Handler(Looper.getMainLooper(), this);
-        mCallbackDispatcher = new CallbackDispatcher();
     }
 
     // json协议 {plugin: "pluginName", method: "methodName", params: {}, info: {}}
@@ -55,8 +54,7 @@ public class JSBridge implements Handler.Callback {
         } catch (JSONException e) {
 
         }
-        CallMethodContext jsContext = new CallMethodContext(
-                plugin, method, params, token, mCallbackDispatcher, mCallbackDispatcher);
+        CallMethodContext jsContext = new CallMethodContext(plugin, method, params, token, this);
         dispatch(jsContext);
     }
 
@@ -73,7 +71,7 @@ public class JSBridge implements Handler.Callback {
             case CALL_METHOD: {
                 CallMethodContext jsContext = (CallMethodContext) msg.obj;
 
-                HybridPlugin hybridPlugin = BreezeSDK.getInstance().getPluginManager().getPlugin(jsContext.getPlugin());
+                HybridPlugin hybridPlugin = mWebView.getPluginManager().getPlugin(jsContext.getPlugin());
                 if(hybridPlugin != null) {
                     hybridPlugin.execute(jsContext.getMethod(), jsContext.getParams(), jsContext);
                 } else {
@@ -101,20 +99,12 @@ public class JSBridge implements Handler.Callback {
         } catch (JSONException e) {
 
         }
-        mWebView.evaluateJavascript("lib.AFocus.callback(" +
+        mWebView.evaluateJavascript("lib.Breeze.callback(" +
                 context.getToken() + ",\'" + result + "\'," + resultInfo + ");");
     }
 
-    private class CallbackDispatcher implements ISuccessedCallback, IFailedCallback{
-
-        @Override
-        public void failed(CallMethodContext context, ResultInfo info) {
-            callbackFailed(context, info);
-        }
-
-        @Override
-        public void successed(CallMethodContext context, ResultInfo info) {
-            callbackSuccessed(context, info);
-        }
+    public void fire(BREvent event) {
+        Log.d(TAG, "{code:" + event.code + ",info:" + event.info + "}");
+        mWebView.evaluateJavascript("lib.Breeze.fire({code:\'" + event.code + "\',info:" + event.info + "});");
     }
 }

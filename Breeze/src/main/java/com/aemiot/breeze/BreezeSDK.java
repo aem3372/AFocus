@@ -1,10 +1,10 @@
 package com.aemiot.breeze;
 
-import android.content.Context;
+import android.net.Uri;
 
-import com.aemiot.breeze.jsbridge.PluginManager;
-import com.aemiot.breeze.jsbridge.plugin.NotifyPlugin;
-import com.aemiot.breeze.jsbridge.plugin.SensorPlugin;
+import com.aemiot.breeze.jsbridge.PluginConfig;
+import com.aemiot.breeze.jsbridge.plugin.NotifcationPlugin;
+import com.aemiot.breeze.jsbridge.plugin.ShakePlugin;
 
 /**
  * Created by fanye on 16/4/10.
@@ -12,32 +12,33 @@ import com.aemiot.breeze.jsbridge.plugin.SensorPlugin;
 public class BreezeSDK {
 
     private boolean isInitialization = false;
+    private Uri mUri;
 
-    private Context mContext;
-
-    private PluginManager mPluginManager;
+    private PluginConfig mPluginConfig;
 
     private BreezeSDK() {
 
     }
 
-    public void initialization(Context context) {
-        if(isInitialization)
+    public void initialization() {
+        if(isInitialization) {
             return;
+        }
         isInitialization = true;
 
-        mContext = context;
-        mPluginManager = new PluginManager();
-        configDefaultJsPlugin();
+        mPluginConfig = new PluginConfig();
     }
 
-    public PluginManager getPluginManager() {
-        return mPluginManager;
+    public PluginConfig getDefaultPluginConfig() {
+        return mPluginConfig;
     }
 
-    private void configDefaultJsPlugin() {
-        mPluginManager.registerPlugin("notify", new NotifyPlugin(mContext));
-        mPluginManager.registerPlugin("sensor", new SensorPlugin(mContext));
+    public void setBrowserUri(Uri uri) {
+        mUri = uri;
+    }
+
+    public Uri getBrowserUri() {
+        return mUri;
     }
 
     private static class SingleHolder {

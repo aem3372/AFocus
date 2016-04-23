@@ -1,5 +1,8 @@
 package com.aemiot.breeze.jsbridge;
 
+import android.os.Handler;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,5 +29,9 @@ public class PluginManager {
 
     public HybridPlugin getPlugin(String name) {
         return mPluginMap.get(name);
+    }
+
+    public Map<String, HybridPlugin> getPluginMap() {
+        return Collections.unmodifiableMap(mPluginMap);
     }
 }

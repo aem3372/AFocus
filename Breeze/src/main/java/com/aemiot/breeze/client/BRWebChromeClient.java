@@ -12,7 +12,7 @@ import com.aemiot.breeze.webview.IWebView;
 public class BRWebChromeClient extends WebChromeClient {
     @Override
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-        if("hybrid://protocol/af".equals(defaultValue)) {
+        if("hybrid://protocol/breeze".equals(defaultValue)) {
             if(view instanceof IWebView && ((IWebView) view).getJSBridge() != null) {
                 ((IWebView) view).getJSBridge().dispatch(message);
                 result.confirm("");

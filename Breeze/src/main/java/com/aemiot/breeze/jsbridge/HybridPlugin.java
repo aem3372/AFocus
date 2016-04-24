@@ -2,9 +2,6 @@ package com.aemiot.breeze.jsbridge;
 
 import android.content.Context;
 
-/**
- * Created by fanye on 16/3/29.
- */
 public abstract class HybridPlugin {
 
     private Context mContext;

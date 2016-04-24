@@ -153,8 +153,20 @@ public class BRWebView extends WebView implements IWebView{
     }
 
     @Override
-    public PluginManager getPluginManager() {
-        return mPluginManager;
+    public void registerPlugin(String name, HybridPlugin plugin) {
+        mPluginManager.registerPlugin(name, plugin);
+        plugin.attach(getContext(), mJSBridge);
+    }
+
+    @Override
+    public void unregisterPlugin(String name) {
+        mPluginManager.getPlugin(name).detach();
+        mPluginManager.unregisterPlugin(name);
+    }
+
+    @Override
+    public HybridPlugin getPlugin(String name) {
+        return mPluginManager.getPlugin(name);
     }
 
     @Override

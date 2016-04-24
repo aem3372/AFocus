@@ -71,7 +71,7 @@ public class JSBridge implements Handler.Callback {
             case CALL_METHOD: {
                 CallMethodContext jsContext = (CallMethodContext) msg.obj;
 
-                HybridPlugin hybridPlugin = mWebView.getPluginManager().getPlugin(jsContext.getPlugin());
+                HybridPlugin hybridPlugin = mWebView.getPlugin(jsContext.getPlugin());
                 if(hybridPlugin != null) {
                     hybridPlugin.execute(jsContext.getMethod(), jsContext.getParams(), jsContext);
                 } else {

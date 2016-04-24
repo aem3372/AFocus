@@ -1,26 +1,12 @@
 package com.aemiot.breeze.client;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.support.v4.view.GravityCompat;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.ViewGroup;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AbsListView;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 
 import com.aemiot.breeze.webview.IWebView;
-import com.aemiot.hybrid.R;
-
-/**
- * Created by fanye on 16/4/9.
- */
 public class BRWebClient extends WebViewClient {
 
     private static final String TAG = "BRWebClient";

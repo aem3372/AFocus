@@ -1,14 +1,9 @@
 package com.aemiot.breeze.jsbridge;
 
-import android.os.Handler;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by fanye on 16/4/10.
- */
 public class PluginManager {
 
     private static final String TAG = "PluginManager";

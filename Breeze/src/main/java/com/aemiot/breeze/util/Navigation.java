@@ -10,9 +10,6 @@ import com.aemiot.breeze.BreezeSDK;
 
 import java.util.List;
 
-/**
- * Created by fanye on 16/4/24.
- */
 public class Navigation {
     public static void jump(Context context, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);

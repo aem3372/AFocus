@@ -1,4 +1,4 @@
-package com.aemiot.shake;
+package com.aemiot.breezedemo;
 
 import org.junit.Test;
 

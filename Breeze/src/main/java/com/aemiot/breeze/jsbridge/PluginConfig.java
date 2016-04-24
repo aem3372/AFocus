@@ -7,9 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by fanye on 16/4/24.
- */
 public class PluginConfig {
     private Map<String, Class<? extends HybridPlugin>> mDefaultPlugin = new HashMap<>();
 

@@ -1,4 +1,4 @@
-package com.aemiot.shake;
+package com.aemiot.breezedemo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

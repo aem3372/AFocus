@@ -16,6 +16,12 @@
             var aTag = document.getElementsByTagName('a')[0];
             aTag.addEventListener('click', function(){
                 //调用android本地方法
+                lib.Breeze.call('custem', 'custemMethod', {}, function(s) {
+                    console.log('succ');
+                }, function(e) {
+                    console.log('fail');
+                });
+
                 lib.Breeze.call('notifcation', 'showToast', {}, function(s) {
                     console.log('succ');
                 }, function(e) {

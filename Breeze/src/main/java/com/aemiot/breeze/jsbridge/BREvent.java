@@ -1,8 +1,5 @@
 package com.aemiot.breeze.jsbridge;
 
-/**
- * Created by fanye on 16/4/23.
- */
 public class BREvent {
     public String code;
     public String info;

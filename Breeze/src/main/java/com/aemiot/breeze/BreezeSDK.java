@@ -6,9 +6,6 @@ import com.aemiot.breeze.jsbridge.PluginConfig;
 import com.aemiot.breeze.jsbridge.plugin.NotifcationPlugin;
 import com.aemiot.breeze.jsbridge.plugin.ShakePlugin;
 
-/**
- * Created by fanye on 16/4/10.
- */
 public class BreezeSDK {
 
     private boolean isInitialization = false;

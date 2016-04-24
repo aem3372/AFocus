@@ -6,9 +6,6 @@ import android.webkit.WebView;
 
 import com.aemiot.breeze.webview.IWebView;
 
-/**
- * Created by fanye on 16/4/9.
- */
 public class BRWebChromeClient extends WebChromeClient {
     @Override
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
